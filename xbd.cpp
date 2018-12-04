@@ -85,6 +85,14 @@ void outputFileContent(string fileContent){
 
 int main(int argc, char *argv[]){
 
+    //cout << argc << " " << argv[1] << " " << argv[2] << endl;
+    if(argc >= 3){
+        string arg1 = argv[1];
+        if(arg1.compare("-b") == 0){
+            cout << "binary option" << endl;
+        }
+    }
+
     string filename = argv[1];
     string fileContent = getFileContents(filename);
 
