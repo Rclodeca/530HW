@@ -1,17 +1,24 @@
+#Ryan Clode, Michael Kemper  
+#cssc0431, cssc0446  
+#CS 530 Spring 2019    
+#Assignment #1, XBD  
+#Makefile
+
+
+
 #Makefile
 
 #Variables
 
 CXX = g++
-CXXFLAGS = -b
 
 #Targets
 
 xbd: xbd.o
-    $(CXX) $(CXXFLAGS) -o xbd main.o
+	$(CXX) -o xbd xbd.o
 
 xbd.o: xbd.cpp xbd.hpp
-    $(CXX) $(CXXFLAGS) -c xbd.cpp
+	$(CXX) -c xbd.cpp
 
 
 

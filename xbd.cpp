@@ -1,3 +1,11 @@
+/*
+Ryan Clode, Michael Kemper  
+cssc0431, cssc0446  
+CS 530 Spring 2019    
+Assignment #1, XBD  
+xbd.cpp
+*/
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -13,13 +21,11 @@ string intToHex(int input){
     stringstream stream;
     stream << hex << input;
     string str = stream.str();
-    //string result;
-    //transform(str.begin(), str.end(), back_inserter(result), ::toupper);
     return str;
 }
 
 string getFileContents(string filename){
-ifstream stream(filename, ios::in | ios::binary);
+ifstream stream(filename.c_str(), ios::in | ios::binary);
     string fileContent;
     if(stream){
         stream.seekg(0, ios::end);
@@ -50,15 +56,13 @@ void outputFileContentHex(string fileContent){
         if(i % 16 == 0) {
             
             if(i != 0){
-                output.append(" ");
+                output.append("  ");
                 output.append(currentLine);
                 currentLine = "";
                 address += 16;
                 output.append("\n");
                 linePosition = 0;
             }
-            //string tmp = to_string(address)
-            //tmp + 
             stringstream stream2;
             stream2 << setw(7) << setfill('0') << intToHex(address) << ": ";
             output.append(stream2.str());
@@ -80,6 +84,7 @@ void outputFileContentHex(string fileContent){
     for(int j = 0; j < padding; j++) {
         output.append(" ");
     }
+    output.append(" ");
     output.append(currentLine);
     
     cout << output << endl;
@@ -96,7 +101,7 @@ void outputFileContentBinary(string fileContent){
         const unsigned char c = fileContent[i];
         if(i % 6 == 0){
             if(i != 0){
-                output.append(" ");
+                output.append("  ");
                 output.append(currentLine);
                 currentLine = "";
                 address += 6;
@@ -111,8 +116,6 @@ void outputFileContentBinary(string fileContent){
             output.append(" ");
             linePosition++;
         }
-        //output.append(bitset<8>(fileContent.c_str()[i]));
-        //cout << "debug: " << bitset<8>(fileContent.c_str()[i]) << endl;
         stringstream binaryStream;
         binaryStream << bitset<8>(fileContent.c_str()[i]);
         output.append(binaryStream.str());
@@ -129,6 +132,7 @@ void outputFileContentBinary(string fileContent){
     for(int j = 0; j < padding; j++) {
         output.append(" ");
     }
+    output.append(" ");
     output.append(currentLine);
     
     cout << output << endl;
@@ -136,16 +140,20 @@ void outputFileContentBinary(string fileContent){
 
 int main(int argc, char *argv[]){
 
-    //cout << argc << " " << argv[1] << " " << argv[2] << endl;
     string arg1 = argv[1];
     if(argc >= 3 && arg1.compare("-b") == 0){
         //Print as Binary
 
-        cout << "binary option" << endl;
         string filename = argv[2];
         string fileContent = getFileContents(filename);
         outputFileContentBinary(fileContent);
         
+
+    } else if (argc >= 3){
+    string filename = argv[2];
+    string fileContent = getFileContents(filename);
+
+    outputFileContentHex(fileContent); 
 
     }
     else {
