@@ -8,6 +8,6 @@ string intToHex(int input);
 
 string getFileContents(string filename);
 
-void outputFileContent(string fileContent);
+void outputFileContentHex(string fileContent);
 
 #endif
